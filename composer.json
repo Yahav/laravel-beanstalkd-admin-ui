@@ -1,5 +1,5 @@
 {
-    "name": "dionera/laravel-beanstalkd-ui",
+    "name": "dionera/laravel-beanstalkd-admin-ui",
     "description": "An Admin UI for Beanstalkd and Laravel",
     "license": "MIT",
     "authors": [
@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "laravel/framework": "^8.40.0",
+        "php": "^7.4 || ^8.2",
+        "laravel/framework": "^10.0",
         "pda/pheanstalk": "^4.0"
     },
     "require-dev": {
