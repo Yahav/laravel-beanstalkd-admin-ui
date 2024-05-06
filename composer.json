@@ -1,5 +1,5 @@
 {
-    "name": "dionera/laravel-beanstalkd-admin-ui",
+    "name": "yahav/laravel-beanstalkd-admin-ui",
     "description": "An Admin UI for Beanstalkd and Laravel",
     "license": "MIT",
     "authors": [
