@@ -3,13 +3,13 @@
 namespace Dionera\BeanstalkdUI\ViewComposers;
 
 use Illuminate\View\View;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 
 class LayoutComposer
 {
-    private PheanstalkInterface $pheanstalk;
+    private PheanstalkManagerInterface $pheanstalk;
 
-    public function __construct(PheanstalkInterface $pheanstalk)
+    public function __construct(PheanstalkManagerInterface $pheanstalk)
     {
         $this->pheanstalk = $pheanstalk;
     }

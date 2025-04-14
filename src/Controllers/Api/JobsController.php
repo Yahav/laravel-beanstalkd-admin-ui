@@ -6,18 +6,18 @@ use Pheanstalk\JobId;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Pheanstalk\Exception\ServerException;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 
 class JobsController extends Controller
 {
-    private PheanstalkInterface $pheanstalk;
+    private PheanstalkManagerInterface $pheanstalk;
 
     /**
      * JobsController constructor.
      *
-     * @param PheanstalkInterface $pheanstalk
+     * @param PheanstalkManagerInterface $pheanstalk
      */
-    public function __construct(PheanstalkInterface $pheanstalk)
+    public function __construct(PheanstalkManagerInterface $pheanstalk)
     {
         $this->pheanstalk = $pheanstalk;
     }

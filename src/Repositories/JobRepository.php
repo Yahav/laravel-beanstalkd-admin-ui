@@ -6,13 +6,13 @@ use Dionera\BeanstalkdUI\Models\Job;
 use Pheanstalk\Job as PheanstalkJob;
 use Pheanstalk\Exception\ServerException;
 use Pheanstalk\Contract\ResponseInterface;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 
 class JobRepository
 {
-    private PheanstalkInterface $pheanstalk;
+    private PheanstalkManagerInterface $pheanstalk;
 
-    public function __construct(PheanstalkInterface $pheanstalk)
+    public function __construct(PheanstalkManagerInterface $pheanstalk)
     {
         $this->pheanstalk = $pheanstalk;
     }

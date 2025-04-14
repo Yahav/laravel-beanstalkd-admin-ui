@@ -4,15 +4,15 @@ namespace Dionera\BeanstalkdUI\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Routing\Controller;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 use Dionera\BeanstalkdUI\Repositories\JobRepository;
 
 class TubesController extends Controller
 {
-    private PheanstalkInterface $pheanstalk;
+    private PheanstalkManagerInterface $pheanstalk;
     private JobRepository $jobs;
 
-    public function __construct(PheanstalkInterface $pheanstalk, JobRepository $jobs)
+    public function __construct(PheanstalkManagerInterface $pheanstalk, JobRepository $jobs)
     {
         $this->pheanstalk = $pheanstalk;
         $this->jobs = $jobs;

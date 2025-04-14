@@ -3,7 +3,7 @@
 namespace Dionera\BeanstalkdUI\Controllers\Api;
 
 use Illuminate\Routing\Controller;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Dionera\BeanstalkdUI\Repositories\JobRepository;
 
@@ -11,9 +11,9 @@ class StatsController extends Controller
 {
     private JobRepository $jobs;
 
-    private PheanstalkInterface $pheanstalk;
+    private PheanstalkManagerInterface $pheanstalk;
 
-    public function __construct(PheanstalkInterface $pheanstalk, JobRepository $jobs)
+    public function __construct(PheanstalkManagerInterface $pheanstalk, JobRepository $jobs)
     {
         $this->jobs = $jobs;
         $this->pheanstalk = $pheanstalk;

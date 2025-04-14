@@ -4,11 +4,11 @@ use Mockery as m;
 use Dionera\BeanstalkdUI\Models\Job;
 use Pheanstalk\Job as PheanstalkJob;
 use Pheanstalk\Response\ArrayResponse;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 use Dionera\BeanstalkdUI\Repositories\JobRepository;
 
 beforeEach(function () {
-    $this->mockPheanstalk = m::mock(PheanstalkInterface::class);
+    $this->mockPheanstalk = m::mock(PheanstalkManagerInterface::class);
     $this->repository = new JobRepository($this->mockPheanstalk);
 });
 

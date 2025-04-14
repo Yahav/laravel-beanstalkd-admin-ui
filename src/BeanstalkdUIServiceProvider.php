@@ -5,7 +5,7 @@ namespace Dionera\BeanstalkdUI;
 use Pheanstalk\Pheanstalk;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Pheanstalk\Contract\PheanstalkInterface;
+use Pheanstalk\Contract\PheanstalkManagerInterface;
 use Dionera\BeanstalkdUI\ViewComposers\LayoutComposer;
 
 class BeanstalkdUIServiceProvider extends ServiceProvider
@@ -14,7 +14,7 @@ class BeanstalkdUIServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/Resources/config/beanstalkdui.php', 'beanstalkdui');
 
-        $this->app->bind(PheanstalkInterface::class, function () {
+        $this->app->bind(PheanstalkManagerInterface::class, function () {
             return Pheanstalk::create(
                 config('beanstalkdui.host'),
                 config('beanstalkdui.port')
