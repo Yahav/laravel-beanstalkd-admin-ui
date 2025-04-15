@@ -2,11 +2,11 @@
 
 namespace Dionera\BeanstalkdUI\Controllers\Api;
 
-use Pheanstalk\JobId;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Pheanstalk\Exception\ServerException;
 use Pheanstalk\Contract\PheanstalkManagerInterface;
+use Pheanstalk\Values\JobId;
 
 class JobsController extends Controller
 {

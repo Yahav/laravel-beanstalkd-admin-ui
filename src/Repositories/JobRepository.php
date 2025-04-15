@@ -3,10 +3,12 @@
 namespace Dionera\BeanstalkdUI\Repositories;
 
 use Dionera\BeanstalkdUI\Models\Job;
-use Pheanstalk\Job as PheanstalkJob;
 use Pheanstalk\Exception\ServerException;
 use Pheanstalk\Contract\ResponseInterface;
 use Pheanstalk\Contract\PheanstalkManagerInterface;
+use Pheanstalk\Values\JobState as PheanstalkJob;
+use Pheanstalk\Values\JobStats;
+use Pheanstalk\Values\TubeName;
 
 class JobRepository
 {
@@ -17,34 +19,36 @@ class JobRepository
         $this->pheanstalk = $pheanstalk;
     }
 
-    public function nextReady(string $tube, bool $withStats = false): ?Job
+    public function nextReady(TubeName $tube, bool $withStats = false): ?Job
     {
-        return $this->next(PheanstalkJob::STATUS_READY, $tube, $withStats);
+        return $this->next(PheanstalkJob::READY, $tube, $withStats);
     }
 
-    public function nextDelayed(string $tube, bool $withStats = false): ?Job
+    public function nextDelayed(TubeName $tube, bool $withStats = false): ?Job
     {
-        return $this->next(PheanstalkJob::STATUS_DELAYED, $tube, $withStats);
+        return $this->next(PheanstalkJob::DELAYED, $tube, $withStats);
     }
 
-    public function nextBuried(string $tube, bool $withStats = false): ?Job
+    public function nextBuried(TubeName $tube, bool $withStats = false): ?Job
     {
-        return $this->next(PheanstalkJob::STATUS_BURIED, $tube, $withStats);
+        return $this->next(PheanstalkJob::BURIED, $tube, $withStats);
     }
 
-    public function getStats(PheanstalkJob $instance): ResponseInterface
+    public function getStats(\Pheanstalk\Values\Job $instance): ?JobStats
     {
         return $this->pheanstalk->statsJob($instance);
     }
 
-    private function next(string $type, string $tube, bool $withStats = false): ?Job
+    private function next(\Pheanstalk\Values\JobState $type, TubeName $tube, bool $withStats = false): ?Job
     {
         try {
+            $type = $type->value;
             $method = 'peek' . ucfirst($type);
 
-            $instance = $this->pheanstalk
-                ->useTube($tube)
-                ->{$method}($tube);
+            $this->pheanstalk
+                ->useTube($tube);
+
+            $instance = $this->pheanstalk->{$method}();
 
             if ($instance === null) {
                 return null;

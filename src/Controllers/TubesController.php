@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Pheanstalk\Contract\PheanstalkManagerInterface;
 use Dionera\BeanstalkdUI\Repositories\JobRepository;
+use Pheanstalk\Values\TubeName;
 
 class TubesController extends Controller
 {
@@ -25,8 +26,10 @@ class TubesController extends Controller
         // Adam Wathan give me your strength!
         $tubes = collect($tubeNames)->map(function ($tube) {
             return collect($this->pheanstalk->statsTube($tube))->slice(1)->all();
-        })->zip($tubeNames)->flatMap(function ($pair) {
-            return [$pair[1] => $pair[0]];
+        })->zip($tubeNames)->flatMap(function (\Illuminate\Support\Collection $pair) {
+            // @var \Pheanstalk\Values\TubeName $tubeName
+            $tubeName = (string) $pair->get(1);
+            return [$tubeName => $pair->get(0)];
         });
 
         return view('beanstalkdui::tubes.index', compact('tubes'));
@@ -34,6 +37,7 @@ class TubesController extends Controller
 
     public function showTube(string $tube): View
     {
+        $tube = new TubeName($tube);
         $stats = $this->pheanstalk->statsTube($tube);
 
         $nextReady = $this->jobs->nextReady($tube, true);

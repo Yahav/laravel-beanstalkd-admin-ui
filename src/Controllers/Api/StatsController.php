@@ -4,6 +4,7 @@ namespace Dionera\BeanstalkdUI\Controllers\Api;
 
 use Illuminate\Routing\Controller;
 use Pheanstalk\Contract\PheanstalkManagerInterface;
+use Pheanstalk\Values\TubeName;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Dionera\BeanstalkdUI\Repositories\JobRepository;
 
@@ -21,6 +22,7 @@ class StatsController extends Controller
 
     public function statsForTube(string $tube): JsonResponse
     {
+        $tube = new TubeName($tube);
         $tubeStats = $this->pheanstalk->statsTube($tube);
 
         $nextReady = $this->jobs->nextReady($tube, true);

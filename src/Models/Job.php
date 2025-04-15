@@ -3,16 +3,17 @@
 namespace Dionera\BeanstalkdUI\Models;
 
 use Illuminate\Support\Arr;
-use Pheanstalk\Job as PheanstalkJob;
+use Pheanstalk\Values\Job as PheanstalkJob;
 use Illuminate\Contracts\Support\Jsonable;
 use Pheanstalk\Contract\ResponseInterface;
+use Pheanstalk\Values\JobStats;
 
 class Job implements Jsonable
 {
     private PheanstalkJob $job;
-    private ?ResponseInterface $stats;
+    private ?JobStats $stats;
 
-    public function __construct(PheanstalkJob $job, ?ResponseInterface $stats = null)
+    public function __construct(PheanstalkJob $job, ?JobStats $stats = null)
     {
         $this->job = $job;
         $this->stats = $stats;

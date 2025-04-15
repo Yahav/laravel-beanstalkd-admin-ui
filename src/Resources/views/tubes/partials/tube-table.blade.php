@@ -21,15 +21,15 @@
                 <a href="{{ route('beanstalkd.tubes.show', ['tube' => $name]) }}">{{ $name }}</a>
             </td>
 
-            <td>{{ $stats['current-jobs-urgent'] }}</td>
-            <td>{{ $stats['current-jobs-ready'] }}</td>
-            <td>{{ $stats['current-jobs-reserved'] }}</td>
-            <td>{{ $stats['current-jobs-delayed'] }}</td>
-            <td>{{ $stats['current-jobs-buried'] }}</td>
-            <td>{{ $stats['current-using'] }}</td>
-            <td>{{ $stats['current-watching'] }}</td>
-            <td>{{ $stats['total-jobs'] }}</td>
-            <td>{{ $stats['cmd-delete'] }}</td>
+            <td>{{ $stats['currentJobsUrgent'] }}</td>
+            <td>{{ $stats['currentJobsReady'] }}</td>
+            <td>{{ $stats['currentJobsReserved'] }}</td>
+            <td>{{ $stats['currentJobsDelayed'] }}</td>
+            <td>{{ $stats['currentJobsBuried'] }}</td>
+            <td>{{ $stats['currentUsing'] }}</td>
+            <td>{{ $stats['currentWatching'] }}</td>
+            <td>{{ $stats['totalJobs'] }}</td>
+            <td>{{ $stats['cmdDelete'] }}</td>
         </tr>
     @endforeach
     </tbody>
